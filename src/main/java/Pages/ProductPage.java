@@ -20,7 +20,8 @@ public class ProductPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         List<WebElement> sizeButtons = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(
-                By.cssSelector("button.size-buttons-size-button.size-buttons-size-button-default.size-buttons-big-size")
+                By.xpath("//button[contains(@class, 'size-buttons-size-button') and contains(@class, 'size-buttons-size-button-default') and (contains(@class, 'size-buttons-big-size') or not(contains(@class, 'size-buttons-big-size')))]")
+
         ));
 
         boolean clicked = false;
