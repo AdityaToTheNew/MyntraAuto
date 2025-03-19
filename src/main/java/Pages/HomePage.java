@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.time.Duration;
 
 public class HomePage extends BasePage {
@@ -13,23 +14,28 @@ public class HomePage extends BasePage {
         super(driver);
     }
 
-    // Locators
-    private By searchBox = By.xpath("//input[@placeholder='Search for products, brands and more']");
-    private By searchButton = By.xpath("//a[@class='desktop-submit']");
 
-    // Method to search for a product
-    public void searchProduct(String product) {
+    public void searchProduct(String productName) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        // Wait until the search box is visible
-        WebElement searchInput = wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox));
-        searchInput.clear();
-        searchInput.sendKeys(product);
+        // Locate and interact with the search box
+        WebElement searchBox = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//input[@class='desktop-searchBar']")));
 
-        // Click the search button
-        WebElement searchBtn = wait.until(ExpectedConditions.elementToBeClickable(searchButton));
-        searchBtn.click();
+        searchBox.clear();
+        searchBox.sendKeys(productName);
+        searchBox.sendKeys(org.openqa.selenium.Keys.ENTER);  // Trigger search
+    }
 
-        System.out.println("Searched for: " + product);
+
+    public void clickBagIcon() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        // Locate the Bag icon
+        WebElement bagIcon = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//span[contains(@class, 'myntraweb-sprite') and contains(@class, 'desktop-iconBag')]")));
+
+        bagIcon.click();
+        System.out.println("Clicked on the Bag icon.");
     }
 }

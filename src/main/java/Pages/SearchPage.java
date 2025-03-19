@@ -15,11 +15,11 @@ public class SearchPage extends BasePage {
         super(driver);
     }
 
-    // Method to select the first product and switch to the new tab
+
     public void selectFirstProduct() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        // Click on the first product
+
         WebElement firstProduct = wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath("//li[contains(@class,'product-base')]")));
         firstProduct.click();
@@ -41,7 +41,7 @@ public class SearchPage extends BasePage {
         }
     }
 
-    // Method to close extra tabs except the main one
+
     public void closeExtraTabs() {
         String mainTab = driver.getWindowHandles().iterator().next();
         for (String handle : driver.getWindowHandles()) {
